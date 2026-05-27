@@ -67,8 +67,8 @@ export default function Home() {
     <main className="min-h-screen bg-stone-50 overflow-hidden">
       <svg width="0" height="0" className="absolute hidden">
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop stopColor="#b37121" offset="0%" />
-          <stop stopColor="#d1952a" offset="100%" />
+          <stop stopColor="#c99e2a" offset="0%" />
+          <stop stopColor="#e8c56c" offset="100%" />
         </linearGradient>
       </svg>
       {/* NAVBAR (Frosted Glass & Circular) */}
@@ -101,7 +101,7 @@ export default function Home() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute top-[calc(100%+0.5rem)] left-0 right-0 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl rounded-3xl p-6 flex flex-col gap-6"
+              className="absolute top-[calc(100%+0.5rem)] left-0 right-0 bg-white border border-stone-100 shadow-xl rounded-3xl p-6 flex flex-col gap-6"
             >
               <div className="flex flex-col gap-4 text-center text-sm uppercase tracking-widest text-gold-600 font-medium">
                 <a onClick={() => setMobileMenuOpen(false)} href="#problema" className="hover:text-gold-500 transition-colors">Essência</a>
@@ -191,17 +191,17 @@ export default function Home() {
                whileInView={{ y: 0, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ delay: 0.5, duration: 0.8 }}
-               className="absolute -bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:-right-6 w-52 md:w-60"
+               className="absolute -bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:-right-6 w-48 md:w-56"
              >
                <motion.div 
                  animate={{ y: [0, -10, 0] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                 className="bg-white/70 backdrop-blur-md rounded-2xl md:rounded-[1.5rem] p-4 md:p-5 flex flex-col items-center gap-1.5 shadow-xl border border-white/60 text-center w-full"
+                 className="bg-white/80 backdrop-blur-md rounded-2xl md:rounded-3xl p-3 md:p-4 flex flex-col items-center gap-1 shadow-xl border border-white text-center w-full"
                >
-                 <div className="flex text-gold-500 gap-1">
-                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current" />)}
+                 <div className="flex text-gold-500 gap-0.5">
+                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
                  </div>
-                 <p className="text-xs md:text-sm font-light text-stone-700 leading-tight">Mais de 500 vidas transformadas</p>
+                 <p className="text-[10px] md:text-xs font-light text-stone-600 leading-tight tracking-wide">Mais de 500 vidas transformadas</p>
                </motion.div>
              </motion.div>
           </div>
@@ -574,18 +574,12 @@ export default function Home() {
                 </a>
               </div>
 
-              <div>
-                <a href="#" className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gold-600 to-gold-500 text-white rounded-full font-medium shadow-lg shadow-gold-500/30 transition-all hover:shadow-gold-500/40 hover:scale-[1.02]">
-                   <MessageCircle className="w-5 h-5" />
-                   <span>Agendar via WhatsApp</span>
-                </a>
-              </div>
             </div>
 
-            <div className="flex-1 w-full lg:w-1/2 relative z-10 flex flex-col">
+            <div className="flex-1 w-full lg:w-1/2 relative z-10 flex flex-col gap-6">
               <div className="w-full h-[400px] lg:h-full min-h-[400px] rounded-[24px] overflow-hidden border border-stone-200 shadow-inner">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15250.757049887713!2d-39.86603091630133!3d-18.71882512964344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7362f689252fc75%3A0x869ca1a384f509d3!2zU8OjbyBNYXRldXMsIEVT!5e0!3m2!1spt-BR!2sbr!4v1714080182608!5m2!1spt-BR!2sbr" 
+                  src="https://www.google.com/maps?q=Centro,S%C3%A3o+Mateus,Espirito+Santo&output=embed" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
@@ -594,6 +588,12 @@ export default function Home() {
                   referrerPolicy="no-referrer-when-downgrade"
                   className="opacity-90"
                 />
+              </div>
+              <div className="mt-auto flex justify-center w-full">
+                <a href="#" className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-8 py-3 bg-gradient-to-r from-gold-600 to-gold-500 text-white rounded-full font-medium shadow-lg shadow-gold-500/30 transition-all hover:shadow-gold-500/40 hover:scale-[1.02] whitespace-nowrap">
+                   <MessageCircle className="w-5 h-5" />
+                   <span>Agendar via WhatsApp</span>
+                </a>
               </div>
             </div>
           </motion.div>
@@ -638,7 +638,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="pt-8 border-t border-stone-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-light tracking-wide">
+          <div className="pt-8 border-t border-stone-800 flex flex-col items-center justify-center gap-4 text-xs font-light tracking-wide text-center">
             <p>© {new Date().getFullYear()} Dra. Danieli Gloria. Todos os direitos reservados.</p>
           </div>
         </div>
