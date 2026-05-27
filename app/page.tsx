@@ -563,13 +563,13 @@ export default function Home() {
                   </div>
                 </div>
 
-                <a href="https://instagram.com/dradanieligloria" target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group cursor-pointer">
+                <a href="https://instagram.com/dra.danieligloriaa" target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 group cursor-pointer">
                   <div className="w-10 h-10 rounded-full bg-white border border-stone-100 flex items-center justify-center text-gold-600 shrink-0 shadow-sm mt-0.5 group-hover:border-gold-300 transition-colors">
                     <Instagram className="w-4 h-4" />
                   </div>
                   <div className="flex flex-col">
                     <p className="text-stone-900 font-medium uppercase tracking-widest text-xs mb-1 group-hover:text-gold-600 transition-colors">Acompanhe no Instagram</p>
-                    <p className="text-stone-500 font-light text-sm leading-relaxed">@dradanieligloria</p>
+                    <p className="text-stone-500 font-light text-sm leading-relaxed">@dra.danieligloriaa</p>
                   </div>
                 </a>
               </div>
@@ -610,7 +610,7 @@ export default function Home() {
                 Elevando a sua naturalidade com tecnologia e expertise, num ambiente preparado para sua excelência.
               </p>
               <div className="flex items-center gap-4">
-                <a href="#" className="w-10 h-10 rounded-full border border-stone-700 flex items-center justify-center hover:border-gold-500 hover:text-gold-500 transition-colors">
+                <a href="https://instagram.com/dra.danieligloriaa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-stone-700 flex items-center justify-center hover:border-gold-500 hover:text-gold-500 transition-colors" aria-label="Instagram">
                   <Instagram className="w-4 h-4" />
                 </a>
                 <a href="#" className="w-10 h-10 rounded-full border border-stone-700 flex items-center justify-center hover:border-gold-500 hover:text-gold-500 transition-colors">
