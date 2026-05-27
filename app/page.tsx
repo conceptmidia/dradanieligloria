@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, Sparkles, ShieldCheck, Heart, Star, MapPin, Instagram, ChevronDown, MessageCircle, Quote, Phone, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Heart, Star, MapPin, Instagram, ChevronDown, MessageCircle, Quote, Phone, X, ChevronLeft, ChevronRight, Menu } from 'lucide-react';
 import Image from 'next/image';
 
 const fadeUp = {
@@ -22,6 +22,7 @@ const staggerContainer = {
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -82,9 +83,39 @@ export default function Home() {
           <a href="#depoimentos" className="hover:text-gold-600 transition-colors">Relatos</a>
           <a href="#faq" className="hover:text-gold-600 transition-colors">Dúvidas</a>
         </div>
-        <a href="#contato" className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-2.5 rounded-full text-xs uppercase tracking-widest font-medium hover:shadow-lg hover:shadow-gold-500/30 hover:scale-105 transition-all">
-          Agendar
-        </a>
+        <div className="flex items-center gap-4">
+          <a href="#contato" className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-2.5 rounded-full text-xs uppercase tracking-widest font-medium hover:shadow-lg hover:shadow-gold-500/30 hover:scale-105 transition-all">
+            Agendar
+          </a>
+          <button 
+            className="lg:hidden p-2 text-stone-600 hover:text-gold-600 bg-white/50 rounded-full border border-stone-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5"/> : <Menu className="w-5 h-5"/>}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute top-[calc(100%+0.5rem)] left-0 right-0 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl rounded-3xl p-6 flex flex-col gap-6"
+            >
+              <div className="flex flex-col gap-4 text-center text-sm uppercase tracking-widest text-gold-600 font-medium">
+                <a onClick={() => setMobileMenuOpen(false)} href="#problema" className="hover:text-gold-500 transition-colors">Essência</a>
+                <a onClick={() => setMobileMenuOpen(false)} href="#solucao" className="hover:text-gold-500 transition-colors">Protocolos</a>
+                <a onClick={() => setMobileMenuOpen(false)} href="#sobre" className="hover:text-gold-500 transition-colors">A Médica</a>
+                <a onClick={() => setMobileMenuOpen(false)} href="#depoimentos" className="hover:text-gold-500 transition-colors">Relatos</a>
+                <a onClick={() => setMobileMenuOpen(false)} href="#faq" className="hover:text-gold-500 transition-colors">Dúvidas</a>
+              </div>
+              <a onClick={() => setMobileMenuOpen(false)} href="#contato" className="sm:hidden flex items-center justify-center gap-2 bg-gradient-to-r from-gold-600 to-gold-500 text-white px-6 py-3 rounded-full text-xs uppercase tracking-widest font-medium shadow-lg shadow-gold-500/20">
+                Agendar
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* HERO SECTION */}
@@ -160,17 +191,17 @@ export default function Home() {
                whileInView={{ y: 0, opacity: 1 }}
                viewport={{ once: true }}
                transition={{ delay: 0.5, duration: 0.8 }}
-               className="absolute -bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:-right-8 w-64 md:w-72"
+               className="absolute -bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:-right-6 w-52 md:w-60"
              >
                <motion.div 
                  animate={{ y: [0, -10, 0] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                 className="bg-white/70 backdrop-blur-md rounded-3xl p-5 md:p-6 flex flex-col items-center gap-3 shadow-xl border border-white/60 text-center w-full"
+                 className="bg-white/70 backdrop-blur-md rounded-2xl md:rounded-[1.5rem] p-4 md:p-5 flex flex-col items-center gap-1.5 shadow-xl border border-white/60 text-center w-full"
                >
                  <div className="flex text-gold-500 gap-1">
-                   {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-current" />)}
+                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current" />)}
                  </div>
-                 <p className="text-sm md:text-base font-medium text-stone-900 leading-tight">Mais de 500 vidas transformadas</p>
+                 <p className="text-xs md:text-sm font-light text-stone-700 leading-tight">Mais de 500 vidas transformadas</p>
                </motion.div>
              </motion.div>
           </div>
@@ -317,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* SOBRE A DOUTORA */}
-      <section id="sobre" className="bg-stone-50 py-24 md:py-32 px-6">
+      <section id="sobre" className="bg-stone-900 py-24 md:py-32 px-6">
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
           <motion.div
             variants={fadeUp}
@@ -325,7 +356,7 @@ export default function Home() {
             whileInView="whileInView"
             className="flex-1 w-full"
           >
-            <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden">
+            <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden border border-stone-800 shadow-2xl">
               <Image 
                 src="/dra-danieli-2.jpg" 
                 alt="Dra Danieli Gloria" 
@@ -333,7 +364,7 @@ export default function Home() {
                 className="object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-stone-900/5 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-stone-900/10 mix-blend-multiply" />
             </div>
           </motion.div>
 
@@ -344,31 +375,31 @@ export default function Home() {
             whileInView="whileInView"
           >
             <div>
-              <span className="uppercase tracking-widest text-xs text-gold-600 font-medium mb-4 block">Sobre a Especialista</span>
-              <h2 className="font-serif text-4xl md:text-5xl text-stone-900 font-light leading-tight mb-6">
-                Construindo a sua <span className="italic text-gold-600">melhor versão</span>.
+              <span className="uppercase tracking-widest text-xs text-gold-500 font-medium mb-4 block">/ Sobre a Especialista</span>
+              <h2 className="font-serif text-4xl md:text-5xl text-stone-50 font-light leading-tight mb-6">
+                Construindo a sua <span className="italic text-gold-500">melhor versão</span>.
               </h2>
-              <h3 className="font-medium text-stone-900 text-xl mb-4">Dra. Danieli Gloria</h3>
-              <p className="text-stone-500 font-light text-lg leading-relaxed mb-4">
+              <h3 className="font-medium text-stone-200 text-xl mb-4">Dra. Danieli Gloria</h3>
+              <p className="text-stone-400 font-light text-lg leading-relaxed mb-4">
                 Com uma visão aprofundada da anatomia facial e tecnologias de precisão, minha missão é proporcionar resultados que combinem com a textura, a idade e a identidade única de cada paciente.
               </p>
-              <p className="text-stone-500 font-light text-lg leading-relaxed">
+              <p className="text-stone-400 font-light text-lg leading-relaxed">
                 Cada protocolo executado não trata apenas camadas superficiais, mas sim a autoestima. Promovemos acolhimento em um ambiente focado em segurança, saúde e luxo sutil.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-stone-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-stone-800">
               {[
                 { icon: ShieldCheck, title: "Segurança Rigorosa", text: "Técnicas modernas e produtos premium." },
                 { icon: Heart, title: "Visão Humana", text: "Atendimento acolhedor, onde você é o centro do foco." }
               ].map((item, i) => (
                 <div key={i} className="flex gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-full bg-white border border-stone-100 flex items-center justify-center flex-col text-gold-600 shadow-sm">
+                  <div className="w-12 h-12 shrink-0 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-col text-gold-500 shadow-sm">
                     <item.icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-stone-900 font-medium mb-1">{item.title}</h3>
-                    <p className="text-stone-500 text-sm font-light leading-relaxed">{item.text}</p>
+                    <h3 className="text-stone-200 font-medium mb-1">{item.title}</h3>
+                    <p className="text-stone-400 text-sm font-light leading-relaxed">{item.text}</p>
                   </div>
                 </div>
               ))}
@@ -378,18 +409,18 @@ export default function Home() {
       </section>
 
       {/* DEPOIMENTOS */}
-      <section id="depoimentos" className="relative bg-stone-900 py-16 md:py-20 px-6 overflow-hidden">
+      <section id="depoimentos" className="relative bg-stone-50 py-16 md:py-20 px-6 overflow-hidden">
         {/* Decorative blur for frosted glass contrast */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-200/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-200/20 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.h2 
             variants={fadeUp}
             initial="initial"
             whileInView="whileInView"
-            className="font-serif text-center text-4xl md:text-5xl leading-tight text-white font-light mb-16"
+            className="font-serif text-center text-4xl md:text-5xl leading-tight text-stone-900 font-light mb-16"
           >
-            A excelência refletida <span className="italic text-gold-500">em cada detalhe</span>.
+            A excelência refletida <span className="italic text-gold-600">em cada detalhe</span>.
           </motion.h2>
 
           <motion.div
@@ -401,14 +432,14 @@ export default function Home() {
             {/* Setas Laterais */}
             <button 
               onClick={() => scrollCarousel('left')} 
-              className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-stone-800 shadow-xl border border-stone-700 hover:scale-105 transition-transform text-gold-500" 
+              className="absolute -left-4 md:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-xl border border-stone-200 hover:scale-105 transition-transform text-gold-500" 
               aria-label="Voltar"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button 
               onClick={() => scrollCarousel('right')} 
-              className="absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-stone-800 shadow-xl border border-stone-700 hover:scale-105 transition-transform text-gold-500" 
+              className="absolute -right-4 md:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-xl border border-stone-200 hover:scale-105 transition-transform text-gold-500" 
               aria-label="Avançar"
             >
               <ChevronRight className="w-6 h-6" />
@@ -426,16 +457,16 @@ export default function Home() {
                 { text: "A Dra. é muito cuidadosa e explicou cada detalhe do preenchimento. Meu sorriso mudou, os lábios ficaram harmônicos e muito bem desenhados.", author: "Amanda L." },
                 { text: "O melhor espaço para estética focada na naturalidade. Sem exageros, entregam muita sofisticação e os resultados duram super bem.", author: "Renata B." },
               ].map((dep, i) => (
-                <div key={i} className="snap-center shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl rounded-3xl p-8 flex flex-col gap-6 relative text-left">
+                <div key={i} className="snap-center shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] bg-white/50 backdrop-blur-xl border border-white/60 shadow-xl rounded-3xl p-8 flex flex-col gap-6 relative text-left">
                   <Quote className="absolute top-6 right-6 w-8 h-8 text-gold-400/20" />
                   <div className="flex text-gold-500">
                     {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
                   </div>
-                  <p className="text-stone-300 font-light italic leading-relaxed flex-1">
+                  <p className="text-stone-600 font-light italic leading-relaxed flex-1">
                     "{dep.text}"
                   </p>
-                  <div className="mt-auto pt-4 border-t border-stone-700/30">
-                    <p className="text-stone-50 font-medium text-sm uppercase tracking-widest">— {dep.author}</p>
+                  <div className="mt-auto pt-4 border-t border-stone-200">
+                    <p className="text-stone-900 font-medium text-sm uppercase tracking-widest">— {dep.author}</p>
                   </div>
                 </div>
               ))}
@@ -445,7 +476,7 @@ export default function Home() {
       </section>
 
       {/* FAQ ACCORDION */}
-      <section id="faq" className="bg-stone-50 py-24 md:py-32 px-6">
+      <section id="faq" className="bg-stone-900 py-24 md:py-32 px-6">
          <div className="max-w-3xl mx-auto">
             <motion.div
               variants={fadeUp}
@@ -453,8 +484,8 @@ export default function Home() {
               whileInView="whileInView"
               className="text-center mb-16"
             >
-              <h2 className="font-serif text-3xl md:text-5xl text-stone-900 font-light mb-6">
-                Perguntas <span className="italic text-gold-600">Frequentes</span>
+              <h2 className="font-serif text-3xl md:text-5xl text-stone-50 font-light mb-6">
+                Perguntas <span className="italic text-gold-500">Frequentes</span>
               </h2>
             </motion.div>
 
@@ -462,18 +493,18 @@ export default function Home() {
               variants={fadeUp}
               initial="initial"
               whileInView="whileInView"
-              className="flex flex-col border-t border-stone-200"
+              className="flex flex-col border-t border-stone-800"
             >
               {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-stone-200">
+                <div key={index} className="border-b border-stone-800">
                   <button 
                     onClick={() => toggleFaq(index)}
-                    className="flex w-full items-center justify-between py-6 text-left"
+                    className="flex w-full items-center justify-between py-6 text-left hover:bg-white/5 px-4 -mx-4 rounded-xl transition-colors"
                   >
-                    <span className="font-medium text-stone-900 pr-8">{faq.q}</span>
+                    <span className="font-medium text-stone-200 pr-8">{faq.q}</span>
                     <motion.div
                       animate={{ rotate: openFaq === index ? 180 : 0 }}
-                      className="text-gold-600 shrink-0"
+                      className="text-gold-500 shrink-0"
                     >
                       <ChevronDown className="w-5 h-5" />
                     </motion.div>
@@ -484,9 +515,9 @@ export default function Home() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden"
+                        className="overflow-hidden px-4 -mx-4"
                       >
-                        <p className="pb-6 text-stone-500 font-light leading-relaxed">
+                        <p className="pb-6 pt-2 text-stone-400 font-light leading-relaxed">
                           {faq.a}
                         </p>
                       </motion.div>
